@@ -7,7 +7,7 @@ import (
 	"time"
 
 	config "github.com/Juminiy/myping-api-view/config"
-	handler "github.com/Juminiy/myping-api-view/handler"
+	"github.com/Juminiy/myping-api-view/handler"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"golang.org/x/sync/errgroup"
@@ -25,15 +25,24 @@ func APIEngine() http.Handler {
 	gin.SetMode(gin.ReleaseMode)
 	apiEngine := gin.New()
 	apiEngine.Use(gin.Recovery())
+	apiEngine.LoadHTMLGlob("./graphic/html/**")
 
-	apiEngine.LoadHTMLGlob("./graphic/*")
 	apiEngine.GET("/", handler.VersionHandler)
 
 	v1 := apiEngine.Group("/v1")
 	ping := v1.Group("/ping")
 	{
-		ping.GET("/html",handler.HistoryCMDHandler)
-		ping.POST("/record",)
+		html := ping.Group("/html")
+		{
+			html.GET("/template", handler.HistoryCMDHandler)
+			html.GET("/dashboard", handler.DashboardHandler)
+		}
+		ping.GET("/search", handler.PingSearchHandler)
+		history := ping.Group("/history")
+		{
+			history.POST("/rstamps", handler.PingHistoryRecordKey)
+			history.POST("/records", handler.PingHistoryRecordVal)
+		}
 	}
 	return apiEngine
 }

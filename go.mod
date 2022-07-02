@@ -3,7 +3,7 @@ module github.com/Juminiy/myping-api-view
 go 1.18
 
 require (
-	github.com/Juminiy/myping v1.0.3
+	github.com/Juminiy/myping v1.0.4
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-redis/redis/v9 v9.0.0-beta.1
 	github.com/spf13/viper v1.12.0

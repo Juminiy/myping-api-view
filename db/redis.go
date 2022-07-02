@@ -10,6 +10,8 @@ import (
 
 const (
 	PING_RECORD_DEFAULT_PREFIX = "v1:"
+	REDIS_PING_RECORD_CURSOR   = 0
+	REDIS_PING_RECORD_COUNT    = 0
 )
 
 var (
