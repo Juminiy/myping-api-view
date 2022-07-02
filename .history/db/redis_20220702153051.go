@@ -8,10 +8,6 @@ import (
 	"github.com/go-redis/redis/v9"
 )
 
-const (
-	PING_RECORD_DEFAULT_PREFIX = "v1:"
-)
-
 var (
 	RedisClient   redis.Client
 	GlobalCentext context.Context

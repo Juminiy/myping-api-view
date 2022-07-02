@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/Juminiy/myping v1.0.3
 	github.com/gin-gonic/gin v1.8.1
+	github.com/go-redis/redis/v9 v9.0.0-beta.1
 	github.com/spf13/viper v1.12.0
 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f
 )
@@ -17,7 +18,6 @@ require (
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
-	github.com/go-redis/redis/v9 v9.0.0-beta.1 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect

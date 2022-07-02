@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	PING_RECORD_DEFAULT_PREFIX = "v1:"
+	
 )
 
 var (

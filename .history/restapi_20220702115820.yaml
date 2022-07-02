@@ -7,7 +7,7 @@ web:
       - node/npm
   api: 
     http: "HTTP-v2.1"
-    version: "Ping Server v1.0"
+    version: "restapi server v1.0"
     listen: ":6666"
     timeout:
       read: 5
