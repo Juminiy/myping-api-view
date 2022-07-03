@@ -14,6 +14,6 @@ web:
       write: 10
 db:
   redis:
-    addr: "127.0.0.1:6379"
-    password: "chisato_redis"
+    addr: "172.18.0.1:6379"
+    password: "me_redis"
     db: 0

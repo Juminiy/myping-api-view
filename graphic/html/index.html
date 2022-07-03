@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- <script src="../js/macarons.js"></script> -->
+    <title>History Command Record</title>
+</head>
+<body>
+    
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+     
+      var myChart = echarts.init(document.getElementById('main'));
+      
+      const instance = axios.create({
+        baseURL: 'https://web-api.chisato.live/v1/ping',
+        timeout: 1000,
+    });
+    var recordDay ;
+        let rstamps ;
+        let records ; 
+      instance.post('/history/rstamps')
+        .then(function (response){
+            rstamps = response.data.data ;
+            console.log(rstamps);
+        });
+      instance.post('/history/records')
+        .then(function (response){
+            records = response.data.data ; 
+            console.log(records);
+        });
+// //2022, time.July, 3, 15, 38, 56, 43044311, time.Local
+//         const rstampsCnst = rstamps ;
+//         const recordsCnst = records ; 
+
+//         let timeArr = new Array(); 
+//         for (let i =0;i<rstampsCnst.length;i++) {
+//             const eachTime = rstampsCnst[i].substr(13,32);
+//             const tmpArr = eachTime.split(",").trim();
+//             recordDay = tmpArr[0]+"."+tmpArr[1]+"."+tmpArr[2];
+//             timeArr.push(tmpArr[3]+":"+tmpArr[4]+":"+tmpArr[5]);
+//         }
+// // {\"packet_recv\":1,\"packet_sent\":1,\"packet_loss\":0,\"desk_url\":\"baidu.com\",\"ip_addr\":{\"IP\":\"220.181.38.148\",\"Zone\":\"\"},\"min_rtt\":31846625,\"max_rtt\":31846625,\"avg_rtt\":31846625,\"std_dev_rtt\":0,\"total_time\":56}
+     
+//         let avgTime = new Array();
+//         for (let i=0;i<recordsCnst.length;i++) {
+//             let objTmp = JSON.parse(records[i]);
+//             avgTime.push(objTmp["avg_rtt"]/100000);
+//         }
+        
+// 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: 'myping History View'
+        },
+        tooltip: {},
+        legend: {
+          data: ['Average RTT']
+        },
+        xAxis: {
+          data: ['15:38:56','15:39:27','15:57:44','16:1:40','16:3:44'],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'Average RTT',
+            type: 'bar',
+            data: [31,68,32,74,43],
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+
+
+
+
+
+</body>
+
+</html>

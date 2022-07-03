@@ -25,6 +25,7 @@ func APIEngine() http.Handler {
 	gin.SetMode(gin.ReleaseMode)
 	apiEngine := gin.New()
 	apiEngine.Use(gin.Recovery())
+	apiEngine.Use(Cors())
 	apiEngine.LoadHTMLGlob("./graphic/html/**")
 
 	apiEngine.GET("/", handler.VersionHandler)
