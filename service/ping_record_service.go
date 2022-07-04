@@ -8,6 +8,10 @@ import (
 	"github.com/Juminiy/myping/model"
 )
 
+const (
+	BASE_M = 1000000
+)
+
 func PingRecordKV(keys bool) []string {
 	resultList := make([]string, 0)
 	iter := db.RedisClient.Scan(
@@ -76,16 +80,16 @@ func StatisticsProtoKV(recordKey string, statis model.StatisticsRecord) interfac
 		rtResult = statis.DestURL
 	}
 	case "MinRtt" : {
-		rtResult = statis.MinRtt
+		rtResult = statis.MinRtt/BASE_M
 	}
 	case "MaxRtt" : {
-		rtResult = statis.MaxRtt
+		rtResult = statis.MaxRtt/BASE_M
 	}
 	case "AvgRtt" : {
-		rtResult = statis.AvgRtt
+		rtResult = statis.AvgRtt/BASE_M
 	}
 	case "StdDevRtt" : {
-		rtResult = statis.StdDevRtt
+		rtResult = statis.StdDevRtt/BASE_M
 	}
 	default : {
 		rtResult = nil
