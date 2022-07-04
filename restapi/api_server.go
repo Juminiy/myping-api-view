@@ -41,9 +41,15 @@ func APIEngine() http.Handler {
 		ping.GET("/search", handler.PingSearchHandler)
 		history := ping.Group("/history")
 		{
-			history.POST("/rstamps", handler.PingHistoryRecordKey)
-			history.POST("/records", handler.PingHistoryRecordVal)
+			history.POST("/rstamps", handler.PingHistoryRecordKey) 
+			history.POST("/records", handler.PingHistoryRecordVal) 
+			arr := history.Group("/arr" ) 
+			{
+				arr.POST("/timestamps", handler.PingHistoryArrTimestamps)
+				arr.POST("/records", handler.PingHistoryArrRecords)
+			}
 		}
+
 	}
 	return apiEngine
 }

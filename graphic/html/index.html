@@ -9,7 +9,7 @@
 </head>
 <body>
     
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="main" style="width: 1350px;height:800px;"></div>
     <script type="text/javascript">
      
       var myChart = echarts.init(document.getElementById('main'));
@@ -21,34 +21,16 @@
     var recordDay ;
         let rstamps ;
         let records ; 
-      instance.post('/history/rstamps')
+      instance.post('/history/arr/timestamps')
         .then(function (response){
             rstamps = response.data.data ;
             console.log(rstamps);
         });
-      instance.post('/history/records')
+      instance.post('/history/arr/records?propertyKey=AvgRtt')
         .then(function (response){
             records = response.data.data ; 
             console.log(records);
         });
-// //2022, time.July, 3, 15, 38, 56, 43044311, time.Local
-//         const rstampsCnst = rstamps ;
-//         const recordsCnst = records ; 
-
-//         let timeArr = new Array(); 
-//         for (let i =0;i<rstampsCnst.length;i++) {
-//             const eachTime = rstampsCnst[i].substr(13,32);
-//             const tmpArr = eachTime.split(",").trim();
-//             recordDay = tmpArr[0]+"."+tmpArr[1]+"."+tmpArr[2];
-//             timeArr.push(tmpArr[3]+":"+tmpArr[4]+":"+tmpArr[5]);
-//         }
-// // {\"packet_recv\":1,\"packet_sent\":1,\"packet_loss\":0,\"desk_url\":\"baidu.com\",\"ip_addr\":{\"IP\":\"220.181.38.148\",\"Zone\":\"\"},\"min_rtt\":31846625,\"max_rtt\":31846625,\"avg_rtt\":31846625,\"std_dev_rtt\":0,\"total_time\":56}
-     
-//         let avgTime = new Array();
-//         for (let i=0;i<recordsCnst.length;i++) {
-//             let objTmp = JSON.parse(records[i]);
-//             avgTime.push(objTmp["avg_rtt"]/100000);
-//         }
         
 // 指定图表的配置项和数据
       var option = {
@@ -60,14 +42,14 @@
           data: ['Average RTT']
         },
         xAxis: {
-          data: ['15:38:56','15:39:27','15:57:44','16:1:40','16:3:44'],
+          data: rstamps,
         },
         yAxis: {},
         series: [
           {
             name: 'Average RTT',
             type: 'bar',
-            data: [31,68,32,74,43],
+            data: records,
           }
         ]
       };

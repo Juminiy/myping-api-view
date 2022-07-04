@@ -55,3 +55,26 @@ func PingHistoryRecordVal(ctx *gin.Context) {
 		},
 	)
 }
+
+func PingHistoryArrTimestamps(ctx *gin.Context) {
+	ctx.JSON(
+		http.StatusOK,
+		gin.H {
+			"code":    http.StatusOK,
+			"message": "success",
+			"data":    myping_service.PingTimestampArr(),
+		},
+	)
+}
+
+func PingHistoryArrRecords(ctx *gin.Context) {
+	ky := ctx.Query("propertyKey")
+	ctx.JSON(
+		http.StatusOK,
+		gin.H {
+			"code":    http.StatusOK,
+			"message": "success",
+			"data":    myping_service.PingRecordArr(ky),
+		},
+	)
+}
